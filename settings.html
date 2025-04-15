@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迂迴策略卡牌 - 語音設定</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>迂迴策略卡牌 - 語音設定</h1>
+        </header>
+        
+        <div class="settings-panel">
+            <div class="api-key-section">
+                <h3>API Key 設定</h3>
+                <label for="api-key">OpenAI API Key:</label>
+                <input type="password" id="api-key" placeholder="輸入您的 OpenAI API Key">
+                <button id="save-api-key" class="btn">儲存</button>
+                <p class="description">需要OpenAI API Key才能使用語音朗讀功能。請在<a href="https://platform.openai.com/api-keys" target="_blank">OpenAI官網</a>獲取。</p>
+            </div>
+            
+            <div class="tts-section">
+                <h3>語音合成設定</h3>
+                <div class="tts-voice-selection">
+                    <label for="tts-voice">選擇語音聲線:</label>
+                    <select id="tts-voice">
+                        <optgroup label="偏男性聲線">
+                            <option value="alloy">Alloy：中低音，穩重略帶科技感</option>
+                            <option value="ash">Ash：偏中性但略偏男性，語調清晰冷靜</option>
+                            <option value="onyx">Onyx：低沉厚實，很明顯的男性聲音</option>
+                            <option value="verse" selected>Verse：溫柔但語調陽剛，算是偏年輕男性感</option>
+                        </optgroup>
+                        <optgroup label="偏女性聲線">
+                            <option value="coral">Coral：柔和親切，非常典型的女性聲線</option>
+                            <option value="echo">Echo：清亮、活潑，偏女性聲音</option>
+                            <option value="fable">Fable：故事感強，富有情感起伏，偏女性</option>
+                            <option value="shimmer">Shimmer：甜美感重，有點少女感，明顯女性</option>
+                        </optgroup>
+                        <optgroup label="偏中性或難以界定的聲音">
+                            <option value="ballad">Ballad：有點像老靈魂講故事的感覺，聲線中性</option>
+                            <option value="nova">Nova：偏中性，輕快又有點機械感</option>
+                            <option value="sage">Sage：溫柔穩定，有些人聽起來像溫柔男聲、有些覺得中性偏女</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <div class="tts-instructions-input">
+                    <label for="tts-instructions">語音指令設定:</label>
+                    <textarea id="tts-instructions" placeholder="設定語音合成的指令，例如口音、語調等特性..."></textarea>
+                </div>
+                <button id="update-tts" class="btn">更新語音設定</button>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button id="go-to-index" class="primary-button">返回主頁</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="settings.js"></script>
+</body>
+</html> 
