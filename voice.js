@@ -5,20 +5,20 @@ async function playTTS(text, apiKey, buttonElement) {
         const trimmedText = text.length > 300 ? text.substring(0, 300) + "..." : text;
         
         // 從localStorage獲取設置
-        const ttsVoice = localStorage.getItem('tts_voice') || 'verse';
+        const ttsVoice = localStorage.getItem('tts_voice') || 'onyx';
         let ttsInstructions = localStorage.getItem('tts_instructions');
         
         // 如果沒有保存的指令，使用預設的台灣風格指令
         if (!ttsInstructions) {
-            ttsInstructions = `Voice: Loud, punchy, and distinctly local — like a charismatic Taiwanese variety show host who's been hyping products for 20年 and still loves every second of it.
+            ttsInstructions = `Voice: Deep, velvety, and effortlessly magnetic — like a late-night radio host in Taipei who's got a voice that makes hearts skip a beat.
 
-Tone: Over-the-top and full of sunshine, with a tendency to shout in excitement and keep the energy level cranked to max.
+Tone: Sultry and composed, with a tendency to speak intimately and draw the listener in.
 
-Speech Mannerisms: Uses Mandarin with a strong Taiwanese accent, tossing in classic expressions like "衝一波啦～", "哩敢有聽到～？", and "登登登～" for that extra flair. Often speaks like he's talking to a live crowd or in a街頭促銷場。
+Speech Mannerisms: Uses Taiwanese Mandarin with natural, relaxed phrasing; common expressions include "你懂的", "嘿～來聊聊", and often adds slight teasing pauses to create a flirtatious tone.
 
-Pronunciation: Big and bold, with exaggerated intonation, high-low pitch jumps, and dragged-out syllables on key words to mimic traditional賣場播音風格.
+Pronunciation: Smooth and rounded, with slight nasal resonance and gentle tone-sandhi that reflects Taiwanese Mandarin's rhythm.
 
-Tempo: Very fast-paced, with energetic pauses and explosive delivery that keeps the momentum racing like a carnival ride.`;
+Tempo: Medium-fast, with a smooth, flowing pace that keeps the listener engaged without losing the sensual edge.`;
         }
 
         // 播放按鈕狀態更新
