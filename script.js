@@ -278,7 +278,7 @@ function drawCard() {
                         const playTtsBtn = document.createElement('button');
                         playTtsBtn.id = 'playTtsBtn';
                         playTtsBtn.className = 'btn tts-btn';
-                        playTtsBtn.textContent = '播放語音';
+                        playTtsBtn.textContent = '播放語音/需設置API';
                         
                         // 將播放按鈕放入按鈕容器
                         buttonContainer.appendChild(playTtsBtn);
@@ -291,7 +291,7 @@ function drawCard() {
                         // 如果按鈕已存在，重置其狀態
                         const playTtsBtn = document.getElementById('playTtsBtn');
                         playTtsBtn.disabled = false;
-                        playTtsBtn.textContent = '播放語音';
+                        playTtsBtn.textContent = '播放語音/需設置API';
                     }
                 }
                 
