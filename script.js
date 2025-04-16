@@ -141,11 +141,15 @@ const cardResult = document.getElementById('cardResult');
 const drawnCardElement = document.getElementById('drawnCard');
 const cardTitleElement = document.getElementById('cardTitle');
 const cardDescriptionElement = document.getElementById('cardDescription');
+const fullImageOverlay = document.getElementById('fullImageOverlay');
+const fullImage = document.getElementById('fullImage');
+const closeFullImageBtn = document.getElementById('closeFullImage');
 
 // 狀態變量
 let hasShuffled = false;
 let cards = [];
 let isShuffling = false;
+let currentCardId = null;
 
 // 初始化
 function initCards() {
@@ -231,6 +235,7 @@ function drawCard() {
     const randomIndex = Math.floor(Math.random() * cards.length);
     const selectedCard = cards[randomIndex];
     const cardId = parseInt(selectedCard.dataset.id);
+    currentCardId = cardId; // 保存當前卡片ID
     
     // 使用anime.js做抽牌動畫
     anime.timeline({
@@ -273,7 +278,7 @@ function drawCard() {
                         const playTtsBtn = document.createElement('button');
                         playTtsBtn.id = 'playTtsBtn';
                         playTtsBtn.className = 'btn tts-btn';
-                        playTtsBtn.textContent = '播放語音/需設置API';
+                        playTtsBtn.textContent = '播放語音';
                         
                         // 將播放按鈕放入按鈕容器
                         buttonContainer.appendChild(playTtsBtn);
@@ -286,13 +291,16 @@ function drawCard() {
                         // 如果按鈕已存在，重置其狀態
                         const playTtsBtn = document.getElementById('playTtsBtn');
                         playTtsBtn.disabled = false;
-                        playTtsBtn.textContent = '播放語音/需設置API';
+                        playTtsBtn.textContent = '播放語音';
                     }
                 }
                 
                 // 將重新開始按鈕移至按鈕容器中
                 resetBtn.remove(); // 從原位置移除
                 buttonContainer.appendChild(resetBtn);
+                
+                // 添加點擊卡片顯示大圖功能
+                drawnCardElement.onclick = showFullImage;
             }
             
             // 隱藏牌堆和按鈕，顯示結果
@@ -306,9 +314,41 @@ function drawCard() {
     });
 }
 
+// 顯示大圖功能
+function showFullImage() {
+    if (currentCardId) {
+        fullImage.src = `card_big/ob_${String(currentCardId).padStart(3, '0')}.png`;
+        fullImageOverlay.style.display = 'flex';
+        
+        // 添加簡單的動畫效果
+        anime({
+            targets: fullImage,
+            scale: [0.9, 1],
+            opacity: [0, 1],
+            duration: 300,
+            easing: 'easeOutQuad'
+        });
+    }
+}
+
+// 關閉大圖功能
+function closeFullImage() {
+    anime({
+        targets: fullImage,
+        scale: [1, 0.9],
+        opacity: [1, 0],
+        duration: 300,
+        easing: 'easeOutQuad',
+        complete: function() {
+            fullImageOverlay.style.display = 'none';
+        }
+    });
+}
+
 // 重置功能
 function resetGame() {
     hasShuffled = false;
+    currentCardId = null;
     
     // 重新顯示牌堆和按鈕
     deckElement.style.display = 'block';
@@ -331,6 +371,9 @@ function resetGame() {
         buttonContainer.remove();
     }
     
+    // 移除卡片點擊事件
+    drawnCardElement.onclick = null;
+    
     // 重新初始化卡牌
     initCards();
 }
@@ -348,6 +391,14 @@ function shuffleArray(array) {
 shuffleBtn.addEventListener('click', shuffleCards);
 drawBtn.addEventListener('click', drawCard);
 resetBtn.addEventListener('click', resetGame);
+closeFullImageBtn.addEventListener('click', closeFullImage);
+
+// 點擊背景也可以關閉大圖
+fullImageOverlay.addEventListener('click', function(e) {
+    if (e.target === fullImageOverlay) {
+        closeFullImage();
+    }
+});
 
 // 頁面加載時初始化
 window.addEventListener('DOMContentLoaded', initCards); 
