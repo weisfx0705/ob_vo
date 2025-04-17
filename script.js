@@ -273,7 +273,7 @@ function drawCard() {
                     const playAudioBtn = document.createElement('button');
                     playAudioBtn.id = 'playAudioBtn';
                     playAudioBtn.className = 'btn audio-btn';
-                    playAudioBtn.textContent = '播放語音';
+                    playAudioBtn.textContent = '聽我說';
                     
                     // 將播放按鈕放入按鈕容器
                     buttonContainer.appendChild(playAudioBtn);
@@ -286,7 +286,7 @@ function drawCard() {
                     // 如果按鈕已存在，重置其狀態
                     const playAudioBtn = document.getElementById('playAudioBtn');
                     playAudioBtn.disabled = false;
-                    playAudioBtn.textContent = '播放語音';
+                    playAudioBtn.textContent = '聽我說';
                 }
                 
                 // 將重新開始按鈕移至按鈕容器中
