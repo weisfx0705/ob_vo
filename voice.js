@@ -1,4 +1,53 @@
-// 語音TTS處理函數
+// 直接播放本地音檔的函數
+async function playLocalAudio(cardId, buttonElement) {
+    try {
+        // 確保卡片ID格式為三位數字（例如：001, 023, 131）
+        const paddedId = String(cardId).padStart(3, '0');
+        
+        // 構建音檔路徑
+        const audioPath = `vo/ob_${paddedId}.wav`;
+        
+        // 播放按鈕狀態更新
+        if (buttonElement) {
+            buttonElement.disabled = true;
+            buttonElement.textContent = '播放中...';
+        }
+        
+        // 創建音訊元素並播放
+        const audio = new Audio(audioPath);
+        audio.play();
+        
+        // 監聽音訊播放完成事件
+        audio.onended = () => {
+            if (buttonElement) {
+                buttonElement.disabled = false;
+                buttonElement.textContent = '播放語音';
+            }
+        };
+        
+        // 監聽錯誤事件
+        audio.onerror = (error) => {
+            console.error('音訊播放錯誤:', error);
+            if (buttonElement) {
+                buttonElement.disabled = false;
+                buttonElement.textContent = '播放語音';
+            }
+            alert('音檔播放失敗，請確認檔案是否存在。');
+        };
+        
+    } catch (error) {
+        console.error('音訊播放錯誤:', error);
+        alert(`音檔播放錯誤: ${error.message}`);
+        
+        // 重置播放按鈕狀態
+        if (buttonElement) {
+            buttonElement.disabled = false;
+            buttonElement.textContent = '播放語音';
+        }
+    }
+}
+
+// 原始的 OpenAI TTS 函數作為備用
 async function playTTS(text, apiKey, buttonElement) {
     try {
         // 如果文本超過300字，截斷到300字

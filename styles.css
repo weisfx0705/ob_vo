@@ -310,7 +310,8 @@ footer a:hover {
 }
 
 .tts-btn:disabled {
-    background-color: #a29bda;
+    background-color: #555;
+    opacity: 0.7;
     cursor: not-allowed;
 }
 
@@ -367,8 +368,12 @@ footer a:hover {
     text-align: center;
 }
 
-.api-key-section, .tts-section {
-    margin-bottom: 3rem;
+.api-key-section, .tts-section, .info-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: rgba(212, 175, 55, 0.05);
 }
 
 .api-key-section label, .tts-voice-selection label, .tts-instructions-input label {
@@ -540,4 +545,24 @@ footer a:hover {
         height: 30px;
         font-size: 20px;
     }
+}
+
+.audio-btn {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.audio-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.audio-btn:disabled {
+    background-color: #555;
+    opacity: 0.7;
+    cursor: not-allowed;
 } 

@@ -259,10 +259,6 @@ function drawCard() {
                 cardTitleElement.textContent = cardInfo.title;
                 cardDescriptionElement.textContent = cardInfo.description;
                 
-                // 添加TTS功能 - 朗讀英文和中文描述
-                const ttsText = `${cardInfo.en} ${cardInfo.description}`;
-                const apiKey = localStorage.getItem('openai_api_key');
-                
                 // 創建或獲取按鈕容器
                 let buttonContainer = document.getElementById('buttonContainer');
                 if (!buttonContainer) {
@@ -272,27 +268,25 @@ function drawCard() {
                     cardResult.appendChild(buttonContainer);
                 }
                 
-                if (apiKey) {
-                    // 創建播放按鈕
-                    if (!document.getElementById('playTtsBtn')) {
-                        const playTtsBtn = document.createElement('button');
-                        playTtsBtn.id = 'playTtsBtn';
-                        playTtsBtn.className = 'btn tts-btn';
-                        playTtsBtn.textContent = '播放語音/需設置API';
-                        
-                        // 將播放按鈕放入按鈕容器
-                        buttonContainer.appendChild(playTtsBtn);
-                        
-                        // 為播放按鈕添加事件監聽器
-                        playTtsBtn.addEventListener('click', function() {
-                            playTTS(ttsText, apiKey, this);
-                        });
-                    } else {
-                        // 如果按鈕已存在，重置其狀態
-                        const playTtsBtn = document.getElementById('playTtsBtn');
-                        playTtsBtn.disabled = false;
-                        playTtsBtn.textContent = '播放語音/需設置API';
-                    }
+                // 創建播放本地音檔按鈕
+                if (!document.getElementById('playAudioBtn')) {
+                    const playAudioBtn = document.createElement('button');
+                    playAudioBtn.id = 'playAudioBtn';
+                    playAudioBtn.className = 'btn audio-btn';
+                    playAudioBtn.textContent = '播放語音';
+                    
+                    // 將播放按鈕放入按鈕容器
+                    buttonContainer.appendChild(playAudioBtn);
+                    
+                    // 為播放按鈕添加事件監聽器
+                    playAudioBtn.addEventListener('click', function() {
+                        playLocalAudio(cardId, this);
+                    });
+                } else {
+                    // 如果按鈕已存在，重置其狀態
+                    const playAudioBtn = document.getElementById('playAudioBtn');
+                    playAudioBtn.disabled = false;
+                    playAudioBtn.textContent = '播放語音';
                 }
                 
                 // 將重新開始按鈕移至按鈕容器中
@@ -360,10 +354,10 @@ function resetGame() {
     // 隱藏結果區域
     cardResult.style.display = 'none';
     
-    // 移除TTS按鈕和按鈕容器(如果存在)
-    const playTtsBtn = document.getElementById('playTtsBtn');
-    if (playTtsBtn) {
-        playTtsBtn.remove();
+    // 移除音頻播放按鈕和按鈕容器(如果存在)
+    const playAudioBtn = document.getElementById('playAudioBtn');
+    if (playAudioBtn) {
+        playAudioBtn.remove();
     }
     
     const buttonContainer = document.getElementById('buttonContainer');
