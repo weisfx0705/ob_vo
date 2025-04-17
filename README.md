@@ -25,6 +25,12 @@
 - Anime.js 動畫庫
 - 原生音頻 API
 
+## 致敬原創
+
+本項目致敬 Brian Eno 和 Peter Schmidt 於1975年創作的《Oblique Strategies》。
+了解更多關於原始《迂迴策略卡牌》的歷史和影響，請訪問：
+[Oblique Strategies - Wikipedia](https://en.wikipedia.org/wiki/Oblique_Strategies)
+
 ## 訪問網站
 
 您可以通過以下鏈接訪問線上版本：
