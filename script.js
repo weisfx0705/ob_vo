@@ -134,7 +134,7 @@ const cardData = [
 ]; 
 // 音效
 const sfx = {
-    shuffle: new Audio('sfx/shuffle.mp3'),
+    shuffle: new Audio('sfx/shuffle2.mp3'),
     pick: new Audio('sfx/pick.mp3')
 };
 
