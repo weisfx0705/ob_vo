@@ -132,6 +132,12 @@ const cardData = [
     { id: 130, en: "From nothing to more than nothing.", title: "從無到有", description: "創作就像煮泡麵，水還沒滾前看起來都是空的。一開始什麼都沒有，但你已經在做「有」了，別懷疑。" },
     { id: 131, en: "Be less critical more often.", title: "更頻繁地減少批判", description: "把內建的那個毒舌評論員靜音，他沒被邀請參加創作派對。創作的時候，請多點溫柔，少點自殘。" }
 ]; 
+// 音效
+const sfx = {
+    shuffle: new Audio('sfx/shuffle.mp3'),
+    pick: new Audio('sfx/pick.mp3')
+};
+
 // DOM元素
 const deckElement = document.getElementById('deck');
 const shuffleBtn = document.getElementById('shuffleBtn');
@@ -171,6 +177,10 @@ function initCards() {
 // 切牌動畫
 function shuffleCards() {
     if (isShuffling || hasShuffled) return;
+    
+    // 播放切牌音效
+    sfx.shuffle.currentTime = 0;
+    sfx.shuffle.play();
     
     isShuffling = true;
     shuffleBtn.disabled = true;
@@ -227,6 +237,10 @@ function shuffleCards() {
 // 抽牌動畫
 function drawCard() {
     if (!hasShuffled) return;
+    
+    // 播放抽牌音效
+    sfx.pick.currentTime = 0;
+    sfx.pick.play();
     
     drawBtn.disabled = true;
     shuffleBtn.disabled = true;
@@ -343,6 +357,12 @@ function closeFullImage() {
 function resetGame() {
     hasShuffled = false;
     currentCardId = null;
+    
+    // 停止所有音效
+    sfx.shuffle.pause();
+    sfx.shuffle.currentTime = 0;
+    sfx.pick.pause();
+    sfx.pick.currentTime = 0;
     
     // 重新顯示牌堆和按鈕
     deckElement.style.display = 'block';
