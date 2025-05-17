@@ -5,7 +5,7 @@ async function playLocalAudio(cardId, buttonElement) {
         const paddedId = String(cardId).padStart(3, '0');
         
         // 構建音檔路徑
-        const audioPath = `vo/ob_${paddedId}.wav`;
+        const audioPath = `vo/mp3/ob_${paddedId}.mp3`;
         
         // 播放按鈕狀態更新
         if (buttonElement) {
